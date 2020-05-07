@@ -16,23 +16,23 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <RadioButton layoutX="126.0" layoutY="36.0" mnemonicParsing="false" text="In-House" />
-        <RadioButton layoutX="213.0" layoutY="36.0" mnemonicParsing="false" text="Outsourced" />
+        <RadioButton fx:id="inHouse" layoutX="126.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectInHouse" text="In-House" />
+        <RadioButton fx:id="outSourced" layoutX="213.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectOutSourced" text="Outsourced" />
         <Label layoutX="40.0" layoutY="60.0" text="ID" />
         <Label layoutX="40.0" layoutY="140.0" text="Inv" />
         <Label layoutX="40.0" layoutY="180.0" text="Price/Cost" />
         <Label layoutX="40.0" layoutY="220.0" text="Max" />
         <Label layoutX="40.0" layoutY="260.0" text="Company Name" />
-        <Button layoutX="270.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
-        <Button layoutX="338.0" layoutY="274.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="modPartSaveButton" layoutX="270.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
+        <Button fx:id="modPartCancelButton" layoutX="338.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#cancelModifyPart" text="Cancel" />
         <Label layoutX="243.0" layoutY="220.0" text="Min" />
         <Label layoutX="40.0" layoutY="100.0" prefHeight="17.0" prefWidth="40.0" text="Name" />
-        <TextField layoutX="140.0" layoutY="60.0" />
-        <TextField layoutX="140.0" layoutY="100.0" />
-        <TextField layoutX="140.0" layoutY="140.0" />
-        <TextField layoutX="140.0" layoutY="180.0" />
-        <TextField layoutX="140.0" layoutY="220.0" prefHeight="25.0" prefWidth="86.0" />
-        <TextField layoutX="279.0" layoutY="220.0" prefHeight="25.0" prefWidth="86.0" />
-        <TextField layoutX="140.0" layoutY="260.0" prefHeight="25.0" prefWidth="105.0" />
+        <TextField fx:id="id" layoutX="140.0" layoutY="60.0" style="-fx-background-color: silver;" />
+        <TextField fx:id="name" layoutX="140.0" layoutY="100.0" onMouseClicked="#clearTextField" text="Part Name" />
+        <TextField fx:id="inventory" layoutX="140.0" layoutY="140.0" onMouseClicked="#clearTextField" text="Inventory" />
+        <TextField fx:id="price" layoutX="140.0" layoutY="180.0" onMouseClicked="#clearTextField" text="Part Price" />
+        <TextField fx:id="max" layoutX="140.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Max" />
+        <TextField fx:id="min" layoutX="279.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Min" />
+        <TextField fx:id="company" layoutX="140.0" layoutY="260.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="105.0" text="Company" />
     </children>
 </AnchorPane>

@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ModifyProductScreen">
    <children>
       <MenuBar prefHeight="27.0" prefWidth="850.0" />
@@ -17,7 +16,7 @@
          <children>
             <AnchorPane layoutX="14.0" layoutY="69.0" prefHeight="310.0" prefWidth="375.0">
                <children>
-                  <Label layoutX="28.0" layoutY="14.0" prefHeight="25.0" prefWidth="86.0" text="Add Product">
+                  <Label layoutX="28.0" layoutY="14.0" prefHeight="25.0" prefWidth="106.0" text="Modify Product">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -28,44 +27,44 @@
                   <Label layoutX="40.0" layoutY="220.0" text="Max" />
                   <Label layoutX="243.0" layoutY="220.0" text="Min" />
                   <Label layoutX="40.0" layoutY="100.0" prefHeight="17.0" prefWidth="40.0" text="Name" />
-                  <TextField layoutX="140.0" layoutY="60.0" />
-                  <TextField layoutX="140.0" layoutY="100.0" />
-                  <TextField layoutX="140.0" layoutY="140.0" />
-                  <TextField layoutX="140.0" layoutY="180.0" />
-                  <TextField layoutX="140.0" layoutY="220.0" prefHeight="25.0" prefWidth="86.0" />
-                  <TextField layoutX="279.0" layoutY="220.0" prefHeight="25.0" prefWidth="86.0" />
+                  <TextField fx:id="id" layoutX="140.0" layoutY="60.0" style="-fx-background-color: silver;" />
+                  <TextField fx:id="name" layoutX="140.0" layoutY="100.0" onMouseClicked="#clearTextField" text="Product Name" />
+                  <TextField fx:id="inventory" layoutX="140.0" layoutY="140.0" onMouseClicked="#clearTextField" text="Product Inventory" />
+                  <TextField fx:id="price" layoutX="140.0" layoutY="180.0" onMouseClicked="#clearTextField" text="Product Price" />
+                  <TextField fx:id="max" layoutX="140.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Max" />
+                  <TextField fx:id="min" layoutX="279.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Min" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="415.0" layoutY="69.0" prefHeight="196.0" prefWidth="390.0">
                <children>
-                  <TextField fx:id="partsSearchBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="149.0" />
-                  <Button fx:id="searchPartsButton" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchParts" text="Search" />
-                  <Button fx:id="addPartsButton" layoutX="275.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#addParts" prefHeight="25.0" prefWidth="72.0" text="Add" />
+                  <TextField fx:id="modifyProductSearch" layoutX="220.0" layoutY="10.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="149.0" />
+                  <Button fx:id="modProdSearchButton" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchParts" text="Search" />
+                  <Button fx:id="modProdAddButton" layoutX="275.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#addParts" prefHeight="25.0" prefWidth="72.0" text="Add" />
                   <TableView fx:id="partsTable" layoutX="9.0" layoutY="40.0" prefHeight="125.0" prefWidth="369.0">
                      <columns>
-                        <TableColumn fx:id="partsTable" prefWidth="58.0" text="Part ID" />
-                        <TableColumn prefWidth="72.0" text="Part Name" />
-                        <TableColumn prefWidth="109.0" text="Inventory Level" />
-                        <TableColumn prefWidth="129.0" text="Price/Cost pet Unit" />
+                        <TableColumn fx:id="modProdPartIdCol" prefWidth="58.0" text="Part ID" />
+                        <TableColumn fx:id="modProdPartNameCol" prefWidth="72.0" text="Part Name" />
+                        <TableColumn fx:id="modProdInvCol" prefWidth="109.0" text="Inventory Level" />
+                        <TableColumn fx:id="modProdPriceCol" prefWidth="129.0" text="Price/Cost pet Unit" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="415.0" layoutY="281.0" prefHeight="196.0" prefWidth="390.0">
                <children>
-                  <Button fx:id="addPartsButton1" layoutX="276.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#addParts" prefHeight="25.0" prefWidth="72.0" text="Delete" />
+                  <Button fx:id="modProdDeleteButton" layoutX="276.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#deleteParts" prefHeight="25.0" prefWidth="72.0" text="Delete" />
                   <TableView fx:id="partsTable" layoutX="9.0" layoutY="40.0" prefHeight="125.0" prefWidth="369.0">
                      <columns>
-                        <TableColumn fx:id="partsTable1" prefWidth="58.0" text="Part ID" />
-                        <TableColumn prefWidth="72.0" text="Part Name" />
-                        <TableColumn prefWidth="109.0" text="Inventory Level" />
-                        <TableColumn prefWidth="129.0" text="Price/Cost pet Unit" />
+                        <TableColumn fx:id="modProdPartIdColAssoc" prefWidth="58.0" text="Part ID" />
+                        <TableColumn fx:id="modProdPartNameColAssoc" prefWidth="72.0" text="Part Name" />
+                        <TableColumn fx:id="modProdInvColAssoc" prefWidth="109.0" text="Inventory Level" />
+                        <TableColumn fx:id="modProdPriceColAssoc" prefWidth="129.0" text="Price/Cost pet Unit" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <Button layoutX="622.0" layoutY="499.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
-            <Button layoutX="700.0" layoutY="499.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Cancel" />
+            <Button fx:id="modProdSaveButton" layoutX="622.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#saveProduct" prefHeight="25.0" prefWidth="65.0" text="Save" />
+            <Button fx:id="modProdCancelButton" layoutX="700.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#cancelModify" prefHeight="25.0" prefWidth="65.0" text="Cancel" />
          </children>
       </AnchorPane>
    </children>

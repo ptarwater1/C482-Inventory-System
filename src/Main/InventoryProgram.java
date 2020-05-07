@@ -28,14 +28,22 @@ public class InventoryProgram extends Application {
     }
 
     void addTestData(Inventory inv) {
-        //InHouse Parts
-        Part a1 = new InHouse(1, "Part A1", 1.89, 8, 6, 120, 105);
-        Part a2 = new InHouse(2, "Part A2", 2.89, 7, 4, 120, 104);
-        Part a3 = new InHouse(3, "Part A3", 3.89, 5, 5, 120, 105);
+        //In House Parts
+        Part a1 = new InHouse(1, "Part A1", 1.89, 8, 1, 120, 105);
+        Part a2 = new InHouse(2, "Part A2", 2.89, 7, 1, 120, 104);
+        Part a3 = new InHouse(3, "Part A3", 3.89, 5, 1, 120, 105);
+        Part a4 = new InHouse(4, "Part A4", 4.89, 8, 1, 120, 106);
         inv.addPart(a1);
         inv.addPart(a2);
         inv.addPart(a3);
+        inv.addPart(a4);
 
+        //Out Sourced Parts
+
+        Part b1 = new OutSourced(5, "Part B1", 1.99, 10, 1, 120, "ABC");
+        Part b2 = new OutSourced(5, "Part B2", 2.99, 10, 1, 120, "DEF");
+        Part b3 = new OutSourced(5, "Part B3", 3.99, 10, 1, 120, "DEF");
+        Part b4 = new OutSourced(5, "Part B4", 4.99, 10, 1, 120, "ABC");
 
     }
 }
