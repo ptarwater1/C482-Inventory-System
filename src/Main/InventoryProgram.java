@@ -18,7 +18,7 @@ public class InventoryProgram extends Application {
         addTestData(inv);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/MainScreen.fxml"));
-        View_Controller.MainScreenController controller = new View_Controller.MainScreenController(inv);
+        View_Controller.MainScreen controller = new View_Controller.MainScreen(inv);
         loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -39,11 +39,16 @@ public class InventoryProgram extends Application {
         inv.addPart(a4);
 
         //Out Sourced Parts
-
         Part b1 = new OutSourced(5, "Part B1", 1.99, 10, 1, 120, "ABC");
         Part b2 = new OutSourced(5, "Part B2", 2.99, 10, 1, 120, "DEF");
         Part b3 = new OutSourced(5, "Part B3", 3.99, 10, 1, 120, "DEF");
         Part b4 = new OutSourced(5, "Part B4", 4.99, 10, 1, 120, "ABC");
+        inv.addPart(b1);
+        inv.addPart(b2);
+        inv.addPart(b3);
+        inv.addPart(b4);
+
+
 
     }
 }

@@ -5,10 +5,11 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="310.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddPart">
+<AnchorPane prefHeight="310.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar prefHeight="25.0" prefWidth="425.0" />
         <Label layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="70.0" text="Modify Part">
@@ -16,13 +17,16 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <RadioButton fx:id="inHouse" layoutX="126.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectInHouse" text="In-House" />
-        <RadioButton fx:id="outSourced" layoutX="213.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectOutSourced" text="Outsourced" />
+        <RadioButton fx:id="inHouse" layoutX="126.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectInHouse" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="sourceToggle" />
+         </toggleGroup></RadioButton>
+        <RadioButton fx:id="outSourced" layoutX="213.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#selectOutSourced" text="Outsourced" toggleGroup="$sourceToggle" />
         <Label layoutX="40.0" layoutY="60.0" text="ID" />
         <Label layoutX="40.0" layoutY="140.0" text="Inv" />
         <Label layoutX="40.0" layoutY="180.0" text="Price/Cost" />
         <Label layoutX="40.0" layoutY="220.0" text="Max" />
-        <Label layoutX="40.0" layoutY="260.0" text="Company Name" />
+        <Label fx:id="companyName" layoutX="40.0" layoutY="260.0" text="Company Name" />
         <Button fx:id="modPartSaveButton" layoutX="270.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
         <Button fx:id="modPartCancelButton" layoutX="338.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#cancelModifyPart" text="Cancel" />
         <Label layoutX="243.0" layoutY="220.0" text="Min" />
@@ -33,6 +37,6 @@
         <TextField fx:id="price" layoutX="140.0" layoutY="180.0" onMouseClicked="#clearTextField" text="Part Price" />
         <TextField fx:id="max" layoutX="140.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Max" />
         <TextField fx:id="min" layoutX="279.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Min" />
-        <TextField fx:id="company" layoutX="140.0" layoutY="260.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="105.0" text="Company" />
+        <TextField fx:id="company" layoutX="140.0" layoutY="260.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="105.0" />
     </children>
 </AnchorPane>

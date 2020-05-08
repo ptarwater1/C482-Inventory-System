@@ -20,7 +20,7 @@
       <AnchorPane layoutX="14.0" layoutY="74.0" prefHeight="196.0" prefWidth="390.0" style="-fx-border-radius: 10; -fx-border-color: gray;">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="50.0" text="Parts" />
-            <TextField fx:id="partsSearchBox" layoutX="220.0" layoutY="10.0" onMouseClicked="#searchParts" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="partsSearchBox" layoutX="220.0" layoutY="10.0" onMouseClicked="#clearFieldParts" prefHeight="25.0" prefWidth="149.0" />
             <Button fx:id="searchPartsButton" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchParts" text="Search" />
             <Button fx:id="deletePartsButton" layoutX="288.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#deleteParts" prefHeight="25.0" prefWidth="72.0" text="Delete" />
             <Button fx:id="modifyPartsButton" layoutX="206.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#modifyParts" prefHeight="25.0" prefWidth="72.0" text="Modify" />
@@ -30,7 +30,7 @@
                 <TableColumn fx:id="partIdCol" prefWidth="58.0" text="Part ID" />
                 <TableColumn fx:id="partNameCol" prefWidth="72.0" text="Part Name" />
                   <TableColumn fx:id="partInvCol" prefWidth="109.0" text="Inventory Level" />
-                  <TableColumn fx:id="partPriceCol" prefWidth="129.0" text="Price/Cost pet Unit" />
+                  <TableColumn fx:id="partPriceCol" prefWidth="129.0" text="Price/Cost per Unit" />
               </columns>
             </TableView>
          </children>
@@ -38,7 +38,7 @@
       <AnchorPane layoutX="425.0" layoutY="74.0" prefHeight="196.0" prefWidth="390.0" style="-fx-border-radius: 10; -fx-border-color: gray;">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="50.0" text="Products" />
-            <TextField fx:id="productsSearchBox" layoutX="220.0" layoutY="10.0" onMouseClicked="#searchProducts" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="productsSearchBox" layoutX="220.0" layoutY="10.0" onMouseClicked="#clearFieldProducts" prefHeight="25.0" prefWidth="149.0" />
             <Button fx:id="searchProductsButton" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchProducts" text="Search" />
             <Button fx:id="deleteProdcutsButton" layoutX="288.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#deleteProducts" prefHeight="25.0" prefWidth="72.0" text="Delete" />
             <Button fx:id="modifyProductsButton" layoutX="206.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#modifyProducts" prefHeight="25.0" prefWidth="72.0" text="Modify" />
@@ -53,6 +53,6 @@
             </TableView>
          </children>
       </AnchorPane>
-      <Button fx:id="exitProgramButton" layoutX="715.0" layoutY="281.0" mnemonicParsing="false" onMouseEntered="#exitProgram" prefHeight="25.0" prefWidth="72.0" text="Exit" />
+      <Button fx:id="exitProgramButton" layoutX="715.0" layoutY="281.0" mnemonicParsing="false" onMouseClicked="#exitProgram" prefHeight="25.0" prefWidth="72.0" text="Exit" />
    </children>
 </AnchorPane>
