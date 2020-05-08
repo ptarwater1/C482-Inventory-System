@@ -126,7 +126,7 @@ public class ModifyProductScreen  implements Initializable {
     }
 
     @FXML
-    void saveProduct(MouseEvent event) {
+    void modProdSave(MouseEvent event) {
 
     }
 

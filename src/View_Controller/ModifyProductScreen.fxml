@@ -63,7 +63,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <Button fx:id="modProdSaveButton" layoutX="622.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#saveProduct" prefHeight="25.0" prefWidth="65.0" text="Save" />
+            <Button fx:id="modProdSaveButton" layoutX="622.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#modProdSave" prefHeight="25.0" prefWidth="65.0" text="Save" />
             <Button fx:id="modProdCancelButton" layoutX="700.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#cancelModify" prefHeight="25.0" prefWidth="65.0" text="Cancel" />
          </children>
       </AnchorPane>

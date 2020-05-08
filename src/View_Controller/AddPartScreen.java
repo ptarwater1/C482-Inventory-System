@@ -1,6 +1,9 @@
 package View_Controller;
 
+import Model.InHouse;
 import Model.Inventory;
+import Model.OutSourced;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,6 +62,11 @@ public class AddPartScreen implements Initializable {
         private TextField company;
 
         @FXML
+        void addPartSave(MouseEvent event) {
+
+        }
+
+        @FXML
         void cancelAddPart(MouseEvent event)  throws IOException
 
         {
@@ -85,10 +93,108 @@ public class AddPartScreen implements Initializable {
         }
 
         @FXML
-        void saveAddPart(MouseEvent event) {
+        void saveAddPart(MouseEvent event) throws IOException {
+            resetFieldsStyle();
+            boolean end = false;
+            TextField[] fieldCount = {inventory, price, min, max};
+            if (inHouse.isSelected() || outSourced.isSelected()) {
+                for (TextField fieldCount1 : fieldCount) {
+                    boolean valueError = checkValue(fieldCount1);
+                    if (valueError) {
+                        end = true;
+                        break;
+                    }
+                    boolean typeError = checkType(fieldCount1);
+                    if (typeError) {
+                        end = true;
+                        break;
+                    }
+                }
+                if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("Name")) {
+                    AlertMessage.errorPart(3, name);
+                    return;
+                }
+                if (Integer.parseInt(min.getText().trim()) > Integer.parseInt(max.getText().trim())) {
+                    AlertMessage.errorPart(7, min);
+                    return;
+                }
+                if (Integer.parseInt(inventory.getText().trim()) < Integer.parseInt(min.getText().trim())) {
+                    AlertMessage.errorPart(5, inventory);
+                    return;
+                }
+                if (Integer.parseInt(inventory.getText().trim()) > Integer.parseInt(max.getText().trim())) {
+                    AlertMessage.errorPart(6, inventory);
+                    return;
+                }
+                if (end) {
+                    return;
+                } else if (company.getText().trim().isEmpty() || company.getText().trim().toLowerCase().equals("company name")) {
+                    AlertMessage.errorPart(2, company);
+                    return;
 
+                } else if (inHouse.isSelected() && !company.getText().trim().matches("[0-9]*")) {
+                    AlertMessage.errorPart(2, company);
+                    return;
+                } else if (inHouse.isSelected()) {
+                    addInHouse();
 
+                } else if (outSourced.isSelected()) {
+                    addOutSourced();
+
+                }
+
+            } else {
+                AlertMessage.errorPart(2, null);
+                return;
+
+            }
+            mainScreen(event);
         }
+
+    private void mainScreen(Event event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/MainScreen.fxml"));
+        MainScreen controller = new MainScreen(inv);
+
+        loader.setController(controller);
+        Parent view = loader.load();
+        Scene scene = new Scene(view);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private boolean checkType(TextField field) {
+
+        if (field == price & !field.getText().trim().matches("\\d+(\\.\\d+)?")) {
+            AlertMessage.errorPart(2, field);
+            return true;
+        }
+        if (field != price & !field.getText().trim().matches("[0-9]*")) {
+            AlertMessage.errorPart(2, field);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkValue(TextField field) {
+        boolean error = false;
+        {
+            if (field.getText().trim().isEmpty() | (field.getText().trim() == null)) {
+                AlertMessage.errorPart(0, field);
+                return true;
+            }
+            if (field == price && Double.parseDouble(field.getText().trim()) < 0) {
+                AlertMessage.errorPart(4, field);
+                error = true;
+            }
+        }
+            error = true;
+            AlertMessage.errorPart(2, field);
+
+        return error;
+    }
+
 
         @FXML
         void selectInHouse(MouseEvent event) {
@@ -112,5 +218,27 @@ public class AddPartScreen implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
         }
 
+
+    private void resetFieldsStyle() {
+        name.setStyle("-fx-border-color: silver");
+        inventory.setStyle("-fx-border-color: silver");
+        price.setStyle("-fx-border-color: silver");
+        min.setStyle("-fx-border-color: silver");
+        max.setStyle("-fx-border-color: silver");
+        company.setStyle("-fx-border-color: silver");
+    }
+
+    private void addInHouse() {
+        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(inventory.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
+
+    }
+
+    private void addOutSourced() {
+        inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(inventory.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
+    }
 
 }

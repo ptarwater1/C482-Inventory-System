@@ -220,18 +220,27 @@ public class MainScreen implements Initializable {
     }
 
     @FXML
-    void modifyParts(MouseEvent event) throws IOException
+    void modifyParts(MouseEvent event) throws IOException {
 
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyPartScreen.fxml"));
-        ModifyPartScreen controller = new ModifyPartScreen(inv);
+    Part select = partsTable.getSelectionModel().getSelectedItem();
+        if (partsInv.isEmpty()) {
+        errorWindow(0);
+        return;
+    }
+        if (!partsInv.isEmpty() && select == null) {
+        errorWindow(1);
+        return;
+    } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyPartScreen.fxml"));
+            ModifyPartScreen controller = new ModifyPartScreen(inv);
 
-        loader.setController(controller);
-        Parent view = loader.load();
-        Scene scene = new Scene(view);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+            loader.setController(controller);
+            Parent view = loader.load();
+            Scene scene = new Scene(view);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
@@ -292,4 +301,23 @@ public class MainScreen implements Initializable {
     public MainScreen(Inventory inv) {
         this.inv = inv;
     }
+
+    private void errorWindow(int code) {
+        if (code == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error.");
+            alert.setHeaderText("Field is Empty.");
+            alert.setContentText("No Item To Be Selected.");
+            alert.showAndWait();
+        }
+        if (code == 1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error.");
+            alert.setHeaderText("Selection Not Valid.");
+            alert.setContentText("Item Must Be Selected.");
+            alert.showAndWait();
+        }
+
+    }
+
 }

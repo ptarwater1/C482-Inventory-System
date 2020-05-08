@@ -81,6 +81,11 @@ public class ModifyPartScreen implements Initializable {
     }
 
     @FXML
+    void modPartSave(MouseEvent event) {
+
+    }
+
+    @FXML
     void selectInHouse(MouseEvent event) {
         companyName.setText("Machine ID");
         company.setPromptText("Machine ID");

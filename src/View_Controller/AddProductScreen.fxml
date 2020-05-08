@@ -68,7 +68,7 @@
                </children>
             </AnchorPane>
             <Button fx:id="addProductsCancelButton" layoutX="693.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#cancelAddProducts" prefHeight="25.0" prefWidth="72.0" text="Cancel" />
-            <Button fx:id="addProdSaveButton" layoutX="610.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#saveAddParts" prefHeight="25.0" prefWidth="65.0" text="Save" />
+            <Button fx:id="addProdSaveButton" layoutX="610.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addProdSave" prefHeight="25.0" prefWidth="65.0" text="Save" />
          </children>
       </AnchorPane>
    </children>

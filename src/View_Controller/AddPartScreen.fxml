@@ -27,7 +27,7 @@
       <Label layoutX="40.0" layoutY="180.0" text="Price/Cost" />
       <Label layoutX="40.0" layoutY="220.0" text="Max" />
       <Label fx:id="companyName" layoutX="40.0" layoutY="260.0" text="Company Name" />
-      <Button fx:id="saveButton" layoutX="270.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#saveAddPart" prefHeight="25.0" prefWidth="52.0" text="Save" />
+      <Button fx:id="saveButton" layoutX="270.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#addPartSave" prefHeight="25.0" prefWidth="52.0" text="Save" />
       <Button fx:id="cancelAddPartButton" layoutX="338.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#cancelAddPart" text="Cancel" />
       <Label layoutX="243.0" layoutY="220.0" text="Min" />
       <Label layoutX="40.0" layoutY="100.0" prefHeight="17.0" prefWidth="40.0" text="Name" />

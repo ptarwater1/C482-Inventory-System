@@ -29,17 +29,17 @@ public class AddProductScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generateProductId();
-        popSearchTable();
+        createProductId();
+        fillSearchTable();
     }
 
-    private void generateProductId() {
+    private void createProductId() {
         boolean match;
         Random randomNum = new Random();
         Integer num = randomNum.nextInt(500);
     }
 
-    private void popSearchTable() {
+    private void fillSearchTable() {
     }
 
     @FXML
@@ -104,6 +104,11 @@ public class AddProductScreen implements Initializable {
 
     @FXML
     void addParts(MouseEvent event) {
+
+    }
+
+    @FXML
+    void addProdSave(MouseEvent event) {
 
     }
 
