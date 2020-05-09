@@ -62,11 +62,6 @@ public class AddPartScreen implements Initializable {
         private TextField company;
 
         @FXML
-        void addPartSave(MouseEvent event) {
-
-        }
-
-        @FXML
         void cancelAddPart(MouseEvent event)  throws IOException
 
         {
@@ -93,7 +88,7 @@ public class AddPartScreen implements Initializable {
         }
 
         @FXML
-        void saveAddPart(MouseEvent event) throws IOException {
+        void addPartSave(MouseEvent event) throws IOException {
             resetFieldsStyle();
             boolean end = false;
             TextField[] fieldCount = {inventory, price, min, max};

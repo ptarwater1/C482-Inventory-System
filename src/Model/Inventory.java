@@ -86,4 +86,13 @@ public class Inventory {
     public ObservableList<Product> getAllProducts() {
         return allProducts;
     }
+
+    public int partIndexSize() {
+        return allParts.size();
+    }
+
+    public int productIndexSize() {
+        return allProducts.size();
+    }
+
 }

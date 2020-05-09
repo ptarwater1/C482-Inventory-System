@@ -31,12 +31,12 @@
                   <Label layoutX="40.0" layoutY="220.0" text="Max" />
                   <Label layoutX="243.0" layoutY="220.0" text="Min" />
                   <Label layoutX="40.0" layoutY="100.0" prefHeight="17.0" prefWidth="40.0" text="Name" />
-                  <TextField layoutX="140.0" layoutY="60.0" style="-fx-background-color: silver;" />
+                  <TextField fx:id="id" layoutX="140.0" layoutY="60.0" style="-fx-background-color: silver;" />
                   <TextField fx:id="name" layoutX="140.0" layoutY="100.0" onMouseClicked="#clearTextField" text="Product Name" />
-                  <TextField fx:id="Inventory" layoutX="140.0" layoutY="140.0" onMouseClicked="#clearTextField" text="Inventory" />
-                  <TextField fx:id="Price" layoutX="140.0" layoutY="180.0" onMouseClicked="#clearTextField" text="Product Price" />
-                  <TextField fx:id="Max" layoutX="140.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Max" />
-                  <TextField fx:id="Min" layoutX="279.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Min" />
+                  <TextField fx:id="inventory" layoutX="140.0" layoutY="140.0" onMouseClicked="#clearTextField" text="Inventory" />
+                  <TextField fx:id="price" layoutX="140.0" layoutY="180.0" onMouseClicked="#clearTextField" text="Product Price" />
+                  <TextField fx:id="max" layoutX="140.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Max" />
+                  <TextField fx:id="min" layoutX="279.0" layoutY="220.0" onMouseClicked="#clearTextField" prefHeight="25.0" prefWidth="86.0" text="Min" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="415.0" layoutY="69.0" prefHeight="196.0" prefWidth="390.0">
@@ -57,7 +57,7 @@
             <AnchorPane layoutX="415.0" layoutY="281.0" prefHeight="196.0" prefWidth="390.0">
                <children>
                   <Button fx:id="addProdDeleteButton" layoutX="275.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#deleteParts" prefHeight="25.0" prefWidth="72.0" text="Delete" />
-                  <TableView fx:id="partsTable" layoutX="9.0" layoutY="40.0" prefHeight="125.0" prefWidth="369.0">
+                  <TableView fx:id="assocPartsTable" layoutX="9.0" layoutY="40.0" prefHeight="125.0" prefWidth="369.0">
                      <columns>
                         <TableColumn fx:id="addProdPartIdColAssoc" prefWidth="58.0" text="Part ID" />
                         <TableColumn fx:id="addProdPartNameColAssoc" prefWidth="72.0" text="Part Name" />
