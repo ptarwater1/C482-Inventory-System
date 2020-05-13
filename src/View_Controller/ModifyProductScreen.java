@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.event.Event;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,8 @@ public class ModifyProductScreen  implements Initializable {
         this.product = product;
 
     }
+
+    private TextField find;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,13 +63,17 @@ public class ModifyProductScreen  implements Initializable {
                 assocPartList.add(part);
             }
         }
-
+        TableColumn<Part, Integer> partIdCol = composePartId();
+        TableColumn<Part, String> nameCol = composeName();
+        TableColumn<Part, Integer> stockCol = composeStock();
+        TableColumn<Part, Double> costCol = composePrice();
+        assocPartsTable.getColumns().addAll(partIdCol, nameCol, stockCol, costCol);
         assocPartsTable.setItems(assocPartList);
 
         this.name.setText(product.getName());
         this.id.setText((Integer.toString(product.getProductId())));
         this.inventory.setText((Integer.toString(product.getStock())));
-        this.price.setText((Double.toString(product.getPrice())));
+        this.price.setText(Double.toString( product.getPrice()));
         this.min.setText((Integer.toString(product.getMin())));
         this.max.setText((Integer.toString(product.getMax())));
 
@@ -115,6 +122,19 @@ public class ModifyProductScreen  implements Initializable {
     private Button modProdCancelButton;
 
     @FXML
+    private void modProdSearch(MouseEvent event) {
+        if (find.getText() != null && find.getText().trim().length() != 0) {
+            partsInvSearch.clear();
+            for (Part i : inv.getAllParts()) {
+                if (i.getName().contains(find.getText().trim())) {
+                    partsInvSearch.add(i);
+                }
+            }
+            partsTableSearch.setItems(partsInvSearch);
+        }
+    }
+
+    @FXML
     void addParts(MouseEvent event) {
         Part addPart = partsTableSearch.getSelectionModel().getSelectedItem();
         boolean repeatedItem = false;
@@ -156,7 +176,12 @@ public class ModifyProductScreen  implements Initializable {
 
     @FXML
     void clearTextField(MouseEvent event) {
-
+        Object source = event.getSource();
+        TextField field = (TextField) source;
+        field.setText("");
+        if (field == find) {
+            partsTableSearch.setItems(partsInv);
+        }
     }
 
     @FXML
@@ -197,12 +222,36 @@ public class ModifyProductScreen  implements Initializable {
 
     @FXML
     void modProdSave(MouseEvent event) {
+        Product product = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
+                Integer.parseInt(inventory.getText().trim()), Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()));
+        for (int i = 0; i < assocPartList.size(); i++) {
+            product.addAssociatedPart(assocPartList.get(i));
+        }
+
+        inv.updateProduct(product);
 
     }
 
     @FXML
     void searchParts(MouseEvent event) {
 
+    }
+
+    private void mainScreen(Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
+            MainScreen controller = new MainScreen(inv);
+
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+
+        }
     }
 
     private <F> TableColumn<F, Integer> composePartId() {
@@ -213,7 +262,7 @@ public class ModifyProductScreen  implements Initializable {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
                     if (!empty) {
-                        setText(String.format("%d", item));
+                        setText(String.format("%s", item));
                     }
                 }
             };
@@ -229,7 +278,7 @@ public class ModifyProductScreen  implements Initializable {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
                     if (!empty) {
-                        setText(String.format("%d", item));
+                        setText(String.format("%s", item));
                     }
                 }
             };

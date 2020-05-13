@@ -227,8 +227,9 @@ public class ModifyPartScreen implements Initializable {
 
     }
 
-    public ModifyPartScreen(Inventory inv) {
+    public ModifyPartScreen(Inventory inv, Part part) {
         this.inv = inv;
+        this.part = part;
     }
 
     @Override
@@ -268,9 +269,5 @@ public class ModifyPartScreen implements Initializable {
         }
     }
 
-    public ModifyPartScreen(Inventory inv, Part part) {
-        this.inv = inv;
-        this.part = part;
-    }
 
 }

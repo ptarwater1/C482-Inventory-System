@@ -291,7 +291,7 @@ public class MainScreen implements Initializable {
             return;
         } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyPartScreen.fxml"));
-            ModifyPartScreen controller = new ModifyPartScreen(inv);
+            ModifyPartScreen controller = new ModifyPartScreen(inv, selected);
 
             loader.setController(controller);
             Parent view = loader.load();
