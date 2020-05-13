@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -234,6 +235,39 @@ public class AddPartScreen implements Initializable {
         inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(inventory.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
+    }
+
+    private <G> TableColumn<G, Integer> composePartId() {
+        TableColumn<G, Integer> partIdCol = new TableColumn("Part Id");
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("Part ID"));
+        partIdCol.setCellFactory((TableColumn<G, Integer> column) -> {
+            return new TableCell<G, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return partIdCol;
+    }
+
+    private <J> TableColumn<J, Double> composePrice() {
+        TableColumn<J, Double> costCol = new TableColumn("Price");
+        costCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        // Format as currency
+        costCol.setCellFactory((TableColumn<J, Double> column) -> {
+            return new TableCell<J, Double>() {
+                @Override
+                protected void updateItem(Double item, boolean empty) {
+                    if (!empty) {
+                        setText("$" + String.format("%.2f", item));
+                    }
+                }
+            };
+        });
+        return costCol;
     }
 
 }

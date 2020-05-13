@@ -13,6 +13,15 @@ public class Product {
     private int min;
     private int max;
 
+    public Product(int productId, String name, double price, int stock, int min, int max) {
+        setProductId(productId);
+        setName(name);
+        setPrice(price);
+        setStock(stock);
+        setMin(min);
+        setMax(max);
+    }
+
     public void setProductId(int productId) {
         this.productId = productId;
     }
@@ -60,7 +69,6 @@ public class Product {
     public int getMax() {
         return this.max;
     }
-
 
     public void addAssociatedPart(Part addPart) {
         associatedPart.add(addPart);

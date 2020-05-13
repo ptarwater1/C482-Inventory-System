@@ -65,13 +65,17 @@ public class AddProductScreen implements Initializable {
 
     private void fillSearchTable() {
         partsInv.setAll(inv.getAllParts());
-
+        TableColumn<Part, Integer> partIdCol = composePartId();
+        TableColumn<Part, String> nameCol = composeName();
+        TableColumn<Part, Integer> stockCol = composeStock();
         TableColumn<Part, Double> costCol = composePrice();
-        partsTable.getColumns().addAll(costCol);
-
+        partsTable.getColumns().addAll(partIdCol, nameCol, stockCol, costCol);
         partsTable.setItems(partsInv);
         partsTable.refresh();
     }
+
+    @FXML
+    private Label addProductLabel;
 
     @FXML
     private TextField id;
@@ -312,7 +316,8 @@ public class AddProductScreen implements Initializable {
     }
 
     private void saveProduct() {
-        Product product = new Product();
+        Product product = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
+                Integer.parseInt(inventory.getText().trim()), Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()));
         for (int i = 0; i < assocPartIndex.size(); i++) {
             product.addAssociatedPart(assocPartIndex.get(i));
         }
@@ -350,10 +355,73 @@ public class AddProductScreen implements Initializable {
 
     private ObservableList<Part> assocPartIndex = FXCollections.observableArrayList();
 
+    private <F> TableColumn<F, Integer> composePartId() {
+        TableColumn<F, Integer> partIdCol = new TableColumn("Part ID");
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        partIdCol.setCellFactory((TableColumn<F, Integer> column) -> {
+            return new TableCell<F, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return partIdCol;
+    }
+
+    private <G> TableColumn<G, Integer> composeProductId() {
+        TableColumn<G, Integer> productIdCol = new TableColumn("Product ID");
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        productIdCol.setCellFactory((TableColumn<G, Integer> column) -> {
+            return new TableCell<G, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return productIdCol;
+    }
+
+    private <H> TableColumn<H, String> composeName() {
+        TableColumn<H, String> nameCol = new TableColumn("Product Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameCol.setCellFactory((TableColumn<H, String> column) -> {
+            return new TableCell<H, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%s", item));
+                    }
+                }
+            };
+        });
+        return nameCol;
+    }
+
+    private <I> TableColumn<I, Integer> composeStock() {
+        TableColumn<I, Integer> stockCol = new TableColumn("Inventory Level");
+        stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        stockCol.setCellFactory((TableColumn<I, Integer> column) -> {
+            return new TableCell<I, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return stockCol;
+    }
+
     private <J> TableColumn<J, Double> composePrice() {
         TableColumn<J, Double> costCol = new TableColumn("Price");
         costCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        // Format as currency
         costCol.setCellFactory((TableColumn<J, Double> column) -> {
             return new TableCell<J, Double>() {
                 @Override

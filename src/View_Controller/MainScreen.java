@@ -4,7 +4,6 @@ import Model.Inventory;
 import Model.Part;
 import Model.Product;
 import javafx.application.Platform;
-import javafx.beans.binding.ObjectExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,27 +26,105 @@ public class MainScreen implements Initializable {
 
     Inventory inv;
 
+    @FXML
+    private TableView<Part> partsTable;
+    ObservableList<Part> partsInv = FXCollections.observableArrayList();
+    ObservableList<Part> partsInvSearch = FXCollections.observableArrayList();
+
+    @FXML
+    private TableView<Product> productsTable;
+    ObservableList<Product> productsInv = FXCollections.observableArrayList();
+    ObservableList<Product> productsInvSearch = FXCollections.observableArrayList();
+
+
     void createPartsTable() {
         partsInv.setAll(inv.getAllParts());
+        TableColumn<Part, Integer> partIdCol = composePartId();
+        TableColumn<Part, String> nameCol = composeName();
+        TableColumn<Part, Integer> stockCol = composeStock();
         TableColumn<Part, Double> costCol = composePrice();
-        partsTable.getColumns().addAll(costCol);
+        partsTable.getColumns().addAll(partIdCol, nameCol, stockCol, costCol);
         partsTable.setItems(partsInv);
-        partsTable.refresh();
-
     }
 
     void createProductsTable() {
         productsInv.setAll(inv.getAllProducts());
+        TableColumn<Product, Integer> productIdCol = composeProductId();
+        TableColumn<Product, String> namePrCol = composePrName();
+        TableColumn<Product, Integer> stockCol = composeStock();
         TableColumn<Product, Double> costCol = composePrice();
-        productsTable.getColumns().addAll(costCol);
+        productsTable.getColumns().addAll(productIdCol, namePrCol, stockCol, costCol);
         productsTable.setItems(productsInv);
         productsTable.refresh();
+    }
+
+    private <F> TableColumn<F, Integer> composePartId() {
+        TableColumn<F, Integer> partIdCol = new TableColumn("Part ID");
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        partIdCol.setCellFactory((TableColumn<F, Integer> column) -> {
+            return new TableCell<F, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return partIdCol;
+    }
+
+    private <G> TableColumn<G, Integer> composeProductId() {
+        TableColumn<G, Integer> productIdCol = new TableColumn("Product ID");
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        productIdCol.setCellFactory((TableColumn<G, Integer> column) -> {
+            return new TableCell<G, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return productIdCol;
+    }
+
+    private <H> TableColumn<H, String> composeName() {
+        TableColumn<H, String> nameCol = new TableColumn("Part Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameCol.setCellFactory((TableColumn<H, String> column) -> {
+            return new TableCell<H, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%s", item));
+                    }
+                }
+            };
+        });
+        return nameCol;
+    }
+
+    private <I> TableColumn<I, Integer> composeStock() {
+        TableColumn<I, Integer> stockCol = new TableColumn("Inventory Level");
+        stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        stockCol.setCellFactory((TableColumn<I, Integer> column) -> {
+            return new TableCell<I, Integer>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%d", item));
+                    }
+                }
+            };
+        });
+        return stockCol;
     }
 
     private <J> TableColumn<J, Double> composePrice() {
         TableColumn<J, Double> costCol = new TableColumn("Price");
         costCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        // Format as currency
         costCol.setCellFactory((TableColumn<J, Double> column) -> {
             return new TableCell<J, Double>() {
                 @Override
@@ -59,6 +136,22 @@ public class MainScreen implements Initializable {
             };
         });
         return costCol;
+    }
+
+    private <K> TableColumn<K, String> composePrName() {
+        TableColumn<K, String> namePrCol = new TableColumn("Product Name");
+        namePrCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        namePrCol.setCellFactory((TableColumn<K, String> column) -> {
+            return new TableCell<K, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    if (!empty) {
+                        setText(String.format("%s", item));
+                    }
+                }
+            };
+        });
+        return namePrCol;
     }
 
     @Override
@@ -83,23 +176,6 @@ public class MainScreen implements Initializable {
     private Button addPartsButton;
 
     @FXML
-    private TableView<Part> partsTable;
-    ObservableList<Part> partsInv = FXCollections.observableArrayList();
-    ObservableList<Part> partsInvSearch = FXCollections.observableArrayList();
-
-    @FXML
-    private TableColumn<Part, Integer> partIdCol;
-
-    @FXML
-    private TableColumn<Part, String> partNameCol;
-
-    @FXML
-    private TableColumn<Part, Integer> partInvCol;
-
-    @FXML
-    private TableColumn<Part, Double> partPriceCol;
-
-    @FXML
     private TextField productsSearchBox;
 
     @FXML
@@ -113,23 +189,6 @@ public class MainScreen implements Initializable {
 
     @FXML
     private Button addProductsButton;
-
-    @FXML
-    private TableView<Product> productsTable;
-    ObservableList<Product> productsInv = FXCollections.observableArrayList();
-    ObservableList<Product> productsInvSearch = FXCollections.observableArrayList();
-
-    @FXML
-    private TableColumn<Product, Integer> productIdCol;
-
-    @FXML
-    private TableColumn<Product, String> productNameCol;
-
-    @FXML
-    private TableColumn<Product, Integer> productInvCol;
-
-    @FXML
-    private TableColumn<Product, Double> productPriceCol;
 
     @FXML
     private Button exitProgramButton;
@@ -222,15 +281,15 @@ public class MainScreen implements Initializable {
     @FXML
     void modifyParts(MouseEvent event) throws IOException {
 
-    Part select = partsTable.getSelectionModel().getSelectedItem();
+        Part selected = partsTable.getSelectionModel().getSelectedItem();
         if (partsInv.isEmpty()) {
-        errorWindow(0);
-        return;
-    }
-        if (!partsInv.isEmpty() && select == null) {
-        errorWindow(1);
-        return;
-    } else {
+            errorWindow(0);
+            return;
+        }
+        if (!partsInv.isEmpty() && selected == null) {
+            errorWindow(1);
+            return;
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyPartScreen.fxml"));
             ModifyPartScreen controller = new ModifyPartScreen(inv);
 
@@ -245,18 +304,28 @@ public class MainScreen implements Initializable {
     }
 
     @FXML
-    void modifyProducts(MouseEvent event)  throws IOException
+    void modifyProducts(MouseEvent event)  throws IOException {
 
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyProductScreen.fxml"));
-        ModifyProductScreen controller = new ModifyProductScreen(inv);
+        Product selected = productsTable.getSelectionModel().getSelectedItem();
+        if (productsInv.isEmpty()) {
+            errorWindow(0);
+            return;
+        }
+        if (!productsInv.isEmpty() && selected == null) {
+            errorWindow(1);
+            return;
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controller/ModifyProductScreen.fxml"));
+            ModifyProductScreen controller;
+            controller = new ModifyProductScreen(inv, selected);
 
-        loader.setController(controller);
-        Parent view = loader.load();
-        Scene scene = new Scene(view);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+            loader.setController(controller);
+            Parent view = loader.load();
+            Scene scene = new Scene(view);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 

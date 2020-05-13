@@ -23,7 +23,6 @@ public class InventoryProgram extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(false);
         stage.show();
     }
 
@@ -45,14 +44,22 @@ public class InventoryProgram extends Application {
         Part b2 = new OutSourced(7, "Part B2", 2.99, 6, 1, 50, "DEF");
         Part b3 = new OutSourced(8, "Part B3", 3.99, 8, 1, 60, "DEF");
         Part b4 = new OutSourced(9, "Part B4", 4.99, 10, 1, 70, "ABC");
-        Part b5 = new OutSourced(10, "Part B5", 45.99, 11, 1, 80, "GHI");
+        Part b5 = new OutSourced(10, "Part B5", 5.99, 11, 1, 80, "GHI");
         inv.addPart(b1);
         inv.addPart(b2);
         inv.addPart(b3);
         inv.addPart(b4);
         inv.addPart(b5);
 
-
+        //Products
+        Product p1 = new Product(01, "Product 1", 10.00, 4, 1, 30);
+        Product p2 = new Product(02, "Product 2", 15.00, 3, 1, 30);
+        Product p3 = new Product(03, "Product 3", 20.00, 2, 1, 30);
+        Product p4 = new Product(04, "Product 4", 25.00, 1, 1, 30);
+        inv.addProduct(p1);
+        inv.addProduct(p2);
+        inv.addProduct(p3);
+        inv.addProduct(p4);
 
     }
 }
