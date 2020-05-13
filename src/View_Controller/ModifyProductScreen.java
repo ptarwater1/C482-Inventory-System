@@ -178,7 +178,7 @@ public class ModifyProductScreen  implements Initializable {
     void clearTextField(MouseEvent event) {
         Object source = event.getSource();
         TextField field = (TextField) source;
-        field.setText("");
+        field.clear();
         if (field == find) {
             partsTableSearch.setItems(partsInv);
         }
@@ -220,39 +220,38 @@ public class ModifyProductScreen  implements Initializable {
         }
     }
 
+    private void mainScreen(Event event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
+        MainScreen controller = new MainScreen(inv);
+
+        loader.setController(controller);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     @FXML
-    void modProdSave(MouseEvent event) {
+    void modProdSave(MouseEvent event) throws IOException {
         Product product = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
                 Integer.parseInt(inventory.getText().trim()), Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()));
         for (int i = 0; i < assocPartList.size(); i++) {
             product.addAssociatedPart(assocPartList.get(i));
         }
-
         inv.updateProduct(product);
 
-    }
+        }
+
 
     @FXML
     void searchParts(MouseEvent event) {
 
     }
 
-    private void mainScreen(Event event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
-            MainScreen controller = new MainScreen(inv);
 
-            loader.setController(controller);
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-
-        }
-    }
 
     private <F> TableColumn<F, Integer> composePartId() {
         TableColumn<F, Integer> partIdCol = new TableColumn("Part ID");

@@ -84,7 +84,7 @@ public class ModifyPartScreen implements Initializable {
     void clearTextField(MouseEvent event) {
         Object source = event.getSource();
         TextField field = (TextField) source;
-        field.setText("");
+        field.clear();
     }
 
     @FXML
