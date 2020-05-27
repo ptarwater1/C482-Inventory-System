@@ -2,12 +2,35 @@ package Model;
 
 public abstract class Part {
 
-    public int partId;
-    private String partName;
-    private double partPrice = 0.0;
-    private int stock;
-    private int min;
-    private int max;
+    protected int partId;
+    protected String partName;
+    protected double partPrice = 0.0;
+    protected int partStock;
+    protected int max;
+    protected int min;
+
+    public int getPartId() {
+        return this.partId;
+    }
+    public String getName() {
+        return this.partName;
+    }
+
+    public double getPrice() {
+        return partPrice;
+    }
+
+    public int getPartStock() {
+        return this.partStock;
+    }
+
+    public int getMax() {
+        return this.max;
+    }
+
+    public int getMin() {
+        return this.min;
+    }
 
     public void setPartId(int partId) {
         this.partId = partId;
@@ -21,41 +44,15 @@ public abstract class Part {
         this.partPrice = price;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
+    public void setPartStock(int amount) {
+        this.partStock = amount;
     }
 
     public void setMax(int max) {
         this.max = max;
     }
 
-    public int getPartId() {
-        return this.partId;
+    public void setMin(int min) {
+        this.min = min;
     }
-
-    public String getName() {
-        return this.partName;
-    }
-
-    public double getPrice() {
-        return this.partPrice;
-    }
-
-    public int getStock() {
-       return this.stock;
-    }
-
-    public int getMin() {
-        return this.min;
-    }
-
-    public int getMax() {
-        return this.max;
-    }
-
-
 }
